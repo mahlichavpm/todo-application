@@ -9,7 +9,9 @@ function App() {
     <>
       <nav>
         <Link to='/' >Home</Link>
+        <br/>
         <Link to='/todo' >Todo</Link>
+        <br/>
         <Link to='/about' >About us</Link>
       </nav>
       <Routes>
