@@ -4,7 +4,9 @@ import TodoForm from './TodoForm'
 
 function TodoList() {
 
-    const [todos,setTodos] = useState([])
+    sessionStorage.setItem('todos',JSON.stringify([]))
+
+    const [todos,setTodos] = useState([JSON.parse(sessionStorage.getItem('todos'))])
 
 
     const addTodo = todo => {
@@ -13,8 +15,9 @@ function TodoList() {
         }
 
         const newTodos = [...todos,todo]
-
+        sessionStorage.setItem('todos',JSON.stringify(newTodos))
         setTodos(newTodos)
+        console.log(sessionStorage.getItem('todos'));
 
     }
 

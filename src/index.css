@@ -12,10 +12,6 @@ code {
     monospace;
 }
 
-.todo-row {
-  display: inline;
-}
-
 .completed {
   text-decoration: line-through;
 }
