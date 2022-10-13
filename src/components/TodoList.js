@@ -1,12 +1,24 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Todo from './Todo'
 import TodoForm from './TodoForm'
 
 function TodoList() {
 
-    sessionStorage.setItem('todos',JSON.stringify([]))
 
-    const [todos,setTodos] = useState([JSON.parse(sessionStorage.getItem('todos'))])
+    const getTodos = () => {
+      let list = JSON.parse(localStorage.getItem('todos'))
+      if(!list){
+        list = localStorage.setItem('todos',JSON.stringify([]))
+      }
+      return list
+    }
+
+    useEffect(()=>{
+      setTodos(getTodos());
+    },[])
+    
+
+    const [todos,setTodos] = useState([]);
 
 
     const addTodo = todo => {
@@ -15,9 +27,8 @@ function TodoList() {
         }
 
         const newTodos = [...todos,todo]
-        sessionStorage.setItem('todos',JSON.stringify(newTodos))
+        localStorage.setItem('todos',JSON.stringify(newTodos))
         setTodos(newTodos)
-        console.log(sessionStorage.getItem('todos'));
 
     }
 
@@ -36,8 +47,8 @@ function TodoList() {
       let index = todos.indexOf( todos.find( e => e.id === id) )
       let updatedtodos = [...todos]
       updatedtodos.splice(index,1)
-      console.log(updatedtodos);
       setTodos(updatedtodos)
+      localStorage.setItem('todos',JSON.stringify(updatedtodos))
     }
 
   return (
